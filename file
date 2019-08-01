@@ -1,0 +1,45 @@
+var Select = React.createClass({
+  getInitialState: function() {
+    return {
+      employeeList:[ { department: 'HR', userId: ['1', '2', '3', '4','5','6']},
+      { department: 'Engineer', userId: ['7', '8', '9', '10','11','12']}
+                   
+      ],
+      selecteddepartment: 'HR'
+    }
+  },
+  handleChange: function(e) {
+    console.log(this.state)
+    this.setState({selecteddepartment: e.target.value})
+  },
+  render: function() {
+    let departmentoption = this.state.employeeList.filter(departmentoption => {
+              return departmentoption.department === this.state.selecteddepartment
+            })
+    return (
+      <div>
+         Select Department
+        <select value={this.state.selecteddepartment} onChange={this.handleChange.bind(this)}>
+          {
+            this.state.employeeList.map((departmentoption, i) => {
+              return <option>{departmentoption.department}</option>
+            })
+          }
+        </select>
+        Select userId
+        <select>
+          {
+            
+            departmentoption[0].userId.map((ids, i) => {
+              return <option>{ids}</option>
+            })
+          }
+        </select>
+        
+      
+        </div>
+    )
+  }
+});
+
+ReactDOM.render(<Select />, document.getElementById('app'));
